@@ -9,10 +9,10 @@ Aprovechando el Nuevo PowerClient introducido en la versión 2019 he creado una 
 
 https://www.rsrsystem.com/rsrsystem/pbpdfutilities/
 
-Tambien podeis ver un video demo en:
+También podéis ver un video demo en:
 
 https://youtu.be/5yb0aYMcQoQ
 
-Para estar al tanto de lo que publico puedes seguri mi blog:
+Para estar al tanto de lo que publico puedes seguir mi blog:
 
 https://rsrsystem.blogspot.com/
