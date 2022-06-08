@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplitMergePdf", "SplitMergePdf\SplitMergePdf.csproj", "{4744E4E5-6DB8-49CB-A62D-86DA21225741}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4744E4E5-6DB8-49CB-A62D-86DA21225741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4744E4E5-6DB8-49CB-A62D-86DA21225741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4744E4E5-6DB8-49CB-A62D-86DA21225741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4744E4E5-6DB8-49CB-A62D-86DA21225741}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {882CCACE-7946-46E5-BD6D-A228FDE899FC}
+	EndGlobalSection
+EndGlobal
