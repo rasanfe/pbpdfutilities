@@ -90,11 +90,11 @@ Constant ULong MAX_PATH = 260
 Constant String SybasePDF = "Sybase DataWindow PS"
 
 Public:
-Constant String GhostExe = "C:\Program Files (x86)\gs\gs9.55.0\bin\gswin32c.exe"
-//Constant String GhostExe = "C:\Program Files\gs\gs9.55.0\bin\gswin64c.exe"
+//Versión de GhostScript 9.56.1
+//Constant String GhostExe = "C:\Program Files (x86)\gs\gs9.56.1\bin\gswin32c.exe"  //32Bits
+Constant String GhostExe = "C:\Program Files\gs\gs9.56.1\bin\gswin64c.exe"				//64Bits
 
 end variables
-
 forward prototypes
 private function long of_runandwait (string as_cmdline)
 private function string of_getpsfilename ()
