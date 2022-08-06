@@ -3,4 +3,5 @@ Save Format v3.0(19990112)
  0 "pbpdfutilities.pbt";
 @end;
 DefaultTarget "pbpdfutilities.pbt";
+DefaultExportEncode "UTF-8";
 DefaultRemoteTarget "pbpdfutilities.pbt";

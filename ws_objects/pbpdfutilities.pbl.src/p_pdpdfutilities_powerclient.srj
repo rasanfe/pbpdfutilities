@@ -1,0 +1,21 @@
+﻿$PBExportHeader$p_pdpdfutilities_powerclient.srj
+EXE:pbpdfutilities.exe,,0,1,1,1,
+CMP:0,0,0,3,0,0,1
+COM:RSRSYSTEM
+DES:Split & Merge PDF
+CPY:Ramón San Félix Ramón
+PRD:PbPDFUtilities
+PVS:2022.0.1716.2
+PVN:2022,0,1716,2
+FVS:2022.0.1716.2
+FVN:2022,0,1716,2
+MAN:0,asInvoker,0
+POWERCLIENT:{"p_pdpdfutilities_powerclient":{"Format":"1.0","AppType":1,"AppName":"pbpdfutilities","OutputDir":"C:\\Users\\Usuario\\AppData\\Local\\Temp\\pbappscache 22.0\\temp\\pbpdfutilities","ResourceName":"","Arguments":"","DeployVersion":"1.02","MinimumValidVersion":"1.01","OnlineTime":"2022-6-15 6:0:0","OfflineTime":"2023-1-31 23:59:59","PromptOverwrite":false,"WindowsClassicStyle":false,"FullBuild":true,"EnableDebugSymbol":true,"EncryptPbdFiles":true,"Is32Bit":false,"CheckLauncherValid":true,"LocalServer":true,"ServerProfile":"","GeneratePackage":false,"PackageOutputExe":false,"PackageLauncher":false,"DefaultLauncher":true,"LauncherPath":"","LauncherMode":0,"RuntimePlatform":0,"LauncherName":"Default","PackageOutputPath":"C:\\Users\\Usuario\\AppData\\Local\\Temp\\pbappscache\\export","FullDownload":false,"DeployWebPage":1,"CreateDesktopShortcut":true,"CreateStartMenuShortcut":true,"CreateAppUninstallShortcut":true,"AppShortcutName":"pbpdfutilities","AppShortcutImage":"","ShowStartAnimatedWindow":true,"CheckPbdValidaty":false,"StartMode":2,"IsVerOffCheck":false,"PBCParams":"","RuntimeVersion":"22.0.0.1716","PreloadEventCommands":"","RunCommandAsAdmin":false,"AlwaysRunCommand":false,"ProductName":"PbPDFUtilities","CompanyName":"RSRSYSTEM","Description":"Split & Merge PDF","Copyright":"Ramón San Félix Ramón","ProductVersion":"2022.0.1716.2","FileVersion":"2022.0.1716.2","ProductVersionMajor":2022,"ProductVersionMinor":0,"ProductVersionBuild":1716,"ProductVersionRevision":2,"FileVersionMajor":2022,"FileVersionMinor":0,"FileVersionBuild":1716,"FileVersionRevision":2,"GenerateOption":2,"ExecutionLevel":2,"AllowAccessSystemUI":false,"RunWithHttps":false,"RunWithShellApp":true,"RunArguments":"","RunHost":"localhost","RunPort":"","Libraries":[{"PbdName":"pbpdfutilities.pbd","PbdLocalPath":"pbpdfutilities.pbd"}],"PredownloadPackages":{},"PredownloadFiles":["FileService.dll","home.html","itextsharp.dll","prueba_4_paginas_para_split.pdf","prueba_pagina1_para_join.pdf","prueba_pagina2_para_join.pdf","SplitMergePdf.dll"],"InstantDownloadFiles":["icono.ico","logo.jpg"],"RuntimeModules":["Core Runtime Files"],"RegisterFiles":[],"Signing":{"SignOption":0,"CustomScript":"","SignTool":"","PfxFile":"","PfxPassword":"","Algorithm":"SHA256","TimeStamp":"http://timestamp.digicert.com"},"powerserver":{"webapiurl":"","webapihost":"localhost","webapiport":5009,"iswebapihttps":false,"srvsrcoutdir":"C:\\Users\\Usuario\\source\\repos","srvsrcoutdiradditiondir":"","modelname":"","generateopts":0,"licensefile":"","licenseversion":"","licensecontent":"","TemplateTypeName":"Default","TargetFramework":"","bBuildSolution":true,"EnvironmentType":"Default"},"IniConfigFiles":[],"CSharpUIConfig":{"ServerType":0,"RuntimeFileType":1,"UseExistPowerServer":true}}}
+PBD:pbpdfutilities.pbl,,1
+OBJ:C:\projecto pw2022\Blog\Actualizado a 2022\pbPDFUtilities\pbpdfutilities.pbl,vs_web_browser,u
+OBJ:C:\projecto pw2022\Blog\Actualizado a 2022\pbPDFUtilities\pbpdfutilities.pbl,nvo_fileservice,u
+OBJ:C:\projecto pw2022\Blog\Actualizado a 2022\pbPDFUtilities\pbpdfutilities.pbl,n_cst_ghostscript,u
+OBJ:C:\projecto pw2022\Blog\Actualizado a 2022\pbPDFUtilities\pbpdfutilities.pbl,pbpdfutilities,a
+OBJ:C:\projecto pw2022\Blog\Actualizado a 2022\pbPDFUtilities\pbpdfutilities.pbl,nvo_splitmerge,u
+OBJ:C:\projecto pw2022\Blog\Actualizado a 2022\pbPDFUtilities\pbpdfutilities.pbl,n_cst_pdfservice,u
+OBJ:C:\projecto pw2022\Blog\Actualizado a 2022\pbPDFUtilities\pbpdfutilities.pbl,w_main,w
