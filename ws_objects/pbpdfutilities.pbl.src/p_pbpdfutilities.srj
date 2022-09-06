@@ -5,10 +5,10 @@ COM:RSRSYSTEM
 DES:Split & Merge PDF
 CPY:Ramón San Félix Ramón
 PRD:PbPDFUtilities
-PVS:2021.0.1818.3
-PVN:2022,0,1818,3
-FVS:2021.0.1818.3
-FVN:2022,0,1818,3
+PVS:2021.0.1878.3
+PVN:2022,0,1878,3
+FVS:2021.0.1878.3
+FVN:2022,0,1878,3
 MAN:0,asInvoker,0
 PBD:pbpdfutilities.pbl,,1
 OBJ:C:\projecto pw2022\Blog\PowerBuilder\pbPDFUtilities\pbpdfutilities.pbl,n_cst_ghostscript,u
