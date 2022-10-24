@@ -2,9 +2,9 @@
 EXE:pbpdfutilities.exe,,0,1,1,0,C:\Program Files (x86)\Appeon\Common\PowerBuilder\Runtime 22.0.0.1878
 CMP:0,0,0,3,0,0,1
 COM:RSRSYSTEM
-DES:Split & Merge PDF
+DES:Appeon Power Builder 2022 Product File 64Bits
 CPY:Ramón San Félix Ramón
-PRD:PbPDFUtilities
+PRD:PbPDFUtilities2022
 PVS:2021.0.1878.3
 PVN:2022,0,1878,3
 FVS:2021.0.1878.3

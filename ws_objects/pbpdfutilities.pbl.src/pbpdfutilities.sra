@@ -29,6 +29,8 @@ string appicon = "icono.ico"
 string appruntimeversion = "22.0.0.1878"
 boolean manualsession = false
 boolean unsupportedapierror = false
+boolean bignoreservercertificate = false
+uint ignoreservercertificate = 0
 end type
 global pbpdfutilities pbpdfutilities
 
@@ -36,6 +38,7 @@ type prototypes
 //Funcion para tomar el directorio de la aplicacion
 FUNCTION	uLong	GetModuleFileName ( uLong lhModule, ref string sFileName, ulong nSize )  LIBRARY "Kernel32.dll" ALIAS FOR "GetModuleFileNameW"
 end prototypes
+
 on pbpdfutilities.create
 appname="pbpdfutilities"
 message=create message
@@ -68,7 +71,7 @@ setnull(lul_handle)
 GetModuleFilename(lul_handle, ls_Path, 1024)
 
 if right(UPPER(ls_path), 7)="220.EXE" or right(UPPER(ls_path), 7)="X64.EXE" then
-	ls_path="C:\projecto pw2022\Blog\Publicado\pbPDFUtilities\pbpdfutilities.exe"
+	ls_path="C:\projecto pw2022\Blog\PowerBuilder\pbPDFUtilities\pbpdfutilities.exe"
 end if
 
 gs_dir=left(ls_path, len(ls_path) - 18)
