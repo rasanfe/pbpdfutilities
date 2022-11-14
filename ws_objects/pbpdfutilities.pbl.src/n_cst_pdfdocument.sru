@@ -102,9 +102,10 @@ ln_file = CREATE nvo_FileService
 
 ls_filename = ln_file.of_getfilenamewithoutextension(as_inputfile)
 
-ll_pag = 1
+ll_pag = 0
 
 DO WHILE TRUE
+	ll_pag ++
 	ln_PDFDoc =  CREATE PDFDocument
 	ll_rtn = ln_PDFDoc.importpdf( as_inputFile, ll_pag, ll_pag, 1)
 	IF ll_rtn = 1 THEN
@@ -113,9 +114,9 @@ DO WHILE TRUE
 		Destroy ln_PDFDoc
 	ELSE
 		IF ll_rtn = -16 THEN ll_rtn = 1 //The start index is out of range Saldremos con exito con este error del LOOP
+		ll_pag --
 		exit
 	END IF
-	ll_pag ++
 LOOP	
 
 of_SetLastError(ll_rtn)
