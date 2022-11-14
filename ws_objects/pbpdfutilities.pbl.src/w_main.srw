@@ -2,6 +2,8 @@
 forward
 global type w_main from window
 end type
+type rb_3 from radiobutton within w_main
+end type
 type st_3 from statictext within w_main
 end type
 type rb_2 from radiobutton within w_main
@@ -70,6 +72,7 @@ boolean minbox = true
 boolean maxbox = true
 string icon = "AppIcon!"
 boolean center = true
+rb_3 rb_3
 st_3 st_3
 rb_2 rb_2
 rb_1 rb_1
@@ -110,6 +113,7 @@ n_cst_pdfservice in_pdf
 vs_web_browser uo_wb_1, uo_wb_2
 Constant Integer UseSplitMerge = 1
 Constant Integer UseGhostScript = 2
+Constant Integer UsePdfDocument = 3
 
 end variables
 
@@ -165,6 +169,7 @@ ast_patform.text=ls_platform
 end subroutine
 
 on w_main.create
+this.rb_3=create rb_3
 this.st_3=create st_3
 this.rb_2=create rb_2
 this.rb_1=create rb_1
@@ -184,7 +189,8 @@ this.cb_split=create cb_split
 this.st_msg=create st_msg
 this.gb_1=create gb_1
 this.r_2=create r_2
-this.Control[]={this.st_3,&
+this.Control[]={this.rb_3,&
+this.st_3,&
 this.rb_2,&
 this.rb_1,&
 this.tab_1,&
@@ -206,6 +212,7 @@ this.r_2}
 end on
 
 on w_main.destroy
+destroy(this.rb_3)
 destroy(this.st_3)
 destroy(this.rb_2)
 destroy(this.rb_1)
@@ -239,6 +246,24 @@ end event
 event close;Destroy in_pdf
 end event
 
+type rb_3 from radiobutton within w_main
+integer x = 3360
+integer y = 484
+integer width = 1152
+integer height = 80
+integer textsize = -8
+integer weight = 400
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+long backcolor = 553648127
+string text = "Usar Nuevo PdfDocument de PowerBuilder 2022"
+end type
+
+event clicked;in_pdf.of_splitmergemetodh( UsePdfDocument)
+end event
+
 type st_3 from statictext within w_main
 integer x = 2121
 integer y = 56
@@ -259,7 +284,7 @@ end type
 
 type rb_2 from radiobutton within w_main
 integer x = 3360
-integer y = 448
+integer y = 408
 integer width = 1152
 integer height = 80
 integer textsize = -8
@@ -277,7 +302,7 @@ end event
 
 type rb_1 from radiobutton within w_main
 integer x = 3360
-integer y = 364
+integer y = 340
 integer width = 1152
 integer height = 80
 integer textsize = -8
@@ -708,9 +733,9 @@ end type
 
 type gb_1 from groupbox within w_main
 integer x = 3246
-integer y = 300
+integer y = 276
 integer width = 1321
-integer height = 264
+integer height = 300
 integer taborder = 80
 integer textsize = -8
 integer weight = 400
