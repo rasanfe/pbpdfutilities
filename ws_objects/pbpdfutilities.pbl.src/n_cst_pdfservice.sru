@@ -49,6 +49,11 @@ ls_files[2]=as_ruta2
 CHOOSE CASE  is_SplitMergeMetodh 
 	CASE UseSplitMerge
 		lb_Result  = in_pdf1.of_mergefiles(ls_files[], ls_join)
+		 //Checks the result
+		IF in_pdf1.il_ErrorType < 0 THEN
+		  messagebox ("Atención", in_pdf1.is_ErrorText, Exclamation!)
+		  lb_result = false
+		END IF
 	CASE UseGhostScript
 		lb_Result =  in_pdf2.of_ghostscript( ls_join, ls_files[], "PDF") 
 	CASE 	UsePdfDocument	
@@ -84,10 +89,11 @@ ls_directorio = in_File.of_GetDirectoryName(as_ruta)
 CHOOSE CASE  is_SplitMergeMetodh 
 	CASE UseSplitMerge
 		li_result = in_pdf1.of_splitFiles( as_ruta, ls_directorio)
-		 
+ 
 		 //Checks the result
 		IF in_pdf1.il_ErrorType < 0 THEN
 		  messagebox ("Atención", in_pdf1.is_ErrorText, Exclamation!)
+		  li_result = 0
 		END IF
 	CASE UseGhostScript
 		If not in_pdf2.of_split( as_ruta) Then
@@ -110,16 +116,18 @@ end function
 public subroutine of_splitmergemetodh (integer ai_splitmergemetodh);is_SplitMergeMetodh=ai_SplitMergeMetodh
 end subroutine
 
-private function boolean of_control_dependencias ();CHOOSE CASE  is_SplitMergeMetodh 
+private function boolean of_control_dependencias ();String ls_archivos[]
+Int li_idx
+
+CHOOSE CASE  is_SplitMergeMetodh 
 	CASE UseSplitMerge
-		IF NOT FileExists(gs_dir+"SplitMergePdf.dll") THEN
-			messagebox ("Atención", "¡ Necesita el Archivo SplitMergePdf.dll !", Exclamation!)
+		ls_archivos[]={"BouncyCastle.Crypto.dll", "itext.barcodes.dll", "itext.commons.dll", "itext.forms.dll", "itext.io.dll", "itext.kernel.dll", "itext.layout.dll", "itext.pdfa.dll", "itext.sign.dll", "itext.styledxmlparser.dll", "itext.svg.dll", "Microsoft.DotNet.PlatformAbstractions.dll", "Microsoft.Extensions.DependencyInjection.Abstractions.dll", "Microsoft.Extensions.DependencyInjection.dll", "Microsoft.Extensions.DependencyModel.dll", "Microsoft.Extensions.Logging.Abstractions.dll", "Microsoft.Extensions.Logging.dll", "Microsoft.Extensions.Options.dll", "Microsoft.Extensions.Primitives.dll", "Newtonsoft.Json.dll", "SplitMergePdf.dll" }
+		FOR li_idx = 1 TO UpperBound(ls_archivos[])
+			IF NOT FileExists(gs_dir+"\itext7\"+ls_archivos[li_idx]) THEN
+				messagebox ("Atención", "¡ Necesita el Archivo "+ls_archivos[li_idx]+" !", Exclamation!)
 			Return FALSE
-		END IF
-		IF NOT FileExists(gs_dir+"itextsharp.dll") THEN
-			messagebox ("Atención", "¡ Necesita el Archivo itextsharp.dll !", Exclamation!)
-			Return FALSE
-		END IF
+			END IF
+		NEXT	
 	CASE UseGhostScript
 		IF NOT FileExists(In_pdf2.GhostExe) THEN
 			messagebox ("Atención", "¡ Necesita el Archivo gswin32c.exe !", Exclamation!)

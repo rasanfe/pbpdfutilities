@@ -12,7 +12,7 @@ global nvo_fileservice nvo_fileservice
 type variables
 
 PUBLIC:
-String is_assemblypath = gs_dir+"FileService.dll"
+String is_assemblypath ="FileService.dll"
 String is_classname = "FileService.FileService"
 
 /* Exception handling -- Indicates how proxy handles .NET exceptions */
@@ -38,7 +38,6 @@ Boolean ib_objectCreated
 PowerObject ipo_errorHandler // Each error triggers <ErrorHandler, ErrorEvent>
 String is_errorEvent
 end variables
-
 forward prototypes
 public subroutine of_seterrorhandler (powerobject apo_newhandler, string as_newevent)
 public subroutine of_signalerror ()
@@ -499,11 +498,11 @@ end function
 
 on nvo_fileservice.create
 call super::create
-triggerevent( this, "constructor" )
+TriggerEvent( this, "constructor" )
 end on
 
 on nvo_fileservice.destroy
-triggerevent( this, "destructor" )
+TriggerEvent( this, "destructor" )
 call super::destroy
 end on
 
