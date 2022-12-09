@@ -14,11 +14,55 @@ PRIVATEWRITE String is_ErrorText
 end variables
 
 forward prototypes
+public function boolean of_filerename (string as_sourcefile, string as_targetfile)
 public function string of_getfilename (string as_sourcefile)
 public function string of_getfilenamewithoutextension (string as_sourcefile)
 public function string of_getdirectoryname (string as_sourcefile)
 public function string of_getextension (string as_sourcefile)
 end prototypes
+
+public function boolean of_filerename (string as_sourcefile, string as_targetfile);//////////////////////////////////////////////////////////////////////////////
+//	Golbal Function: of_FileRename
+//	Arguments:		as_SourceFile			The file to rename.
+//						as_TargetFile			The new file name.
+//	Returns:			Boolean
+//						true if successful,
+//						false if an error occurrs.
+//	Description:	Rename or move a file or directory.
+//////////////////////////////////////////////////////////////////////////////
+//	Rev. History:	Version
+//						12.7.R2.1756   Initial version
+//////////////////////////////////////////////////////////////////////////////
+
+Integer li_Result
+Boolean lb_Result=False
+
+IF trim(as_sourcefile) = trim(as_targetfile) THEN Return TRUE
+
+// 1 = Success;  -1 = Error opening sourcefile;  -2 = Error writing targetfile
+li_Result = FileCopy(as_sourcefile, as_targetfile, true)
+
+if li_Result = 1 then 
+	lb_Result = FileDelete(as_sourcefile)
+else 
+	lb_result = false
+end if
+
+if lb_Result=False then
+	CHOOSE CASE li_result
+		CASE 1	
+			is_ErrorText = "Error Borando  Archivo de Origen "+as_sourcefile
+		CASE -1
+			is_ErrorText =  "Error Abriendo Archivo de Origen "+as_sourcefile
+		CASE -2
+			is_ErrorText = "Error Escribiendo Archivo de Destino "+as_targetfile
+	END CHOOSE		
+	il_ErrorType =  li_result - 1
+end if	
+
+RETURN lb_Result
+	
+end function
 
 public function string of_getfilename (string as_sourcefile);// -----------------------------------------------------------------------------
 // SCRIPT:    of_GetFileName(as_sourcefile)
