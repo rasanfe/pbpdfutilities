@@ -100,7 +100,8 @@ PDFDocument ln_PDFDoc
 
 ln_file = CREATE nvo_FileService
 
-ls_filename = ln_file.of_getfilenamewithoutextension(as_inputfile)
+ls_filename =  ln_file.of_getfilename(as_inputfile)
+ls_filename = ln_file.of_getfilenamewithoutextension(ls_filename)
 
 ll_pag = 0
 

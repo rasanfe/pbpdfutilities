@@ -12,13 +12,14 @@ type variables
 Private:
 nvo_splitmerge in_pdf1
 n_cst_ghostscript in_pdf2
+n_cst_pdfdocument in_pdf3
 nvo_fileservice in_file
 
 Constant Integer UseSplitMerge = 1
 Constant Integer UseGhostScript = 2
+Constant Integer UsePdfDocument = 3
 Integer is_SplitMergeMetodh = UseSplitMerge
 end variables
-
 forward prototypes
 public function boolean of_unir (string as_ruta1, string as_ruta2)
 public function integer of_dividir (string as_ruta)
@@ -44,16 +45,24 @@ ls_join =ls_dir+in_File.of_GetFileNameWithoutExtension(ls_file1)+"_join.pdf"
 ls_files[1]=as_ruta1
 ls_files[2]=as_ruta2
 
-IF  is_SplitMergeMetodh  = UseSplitMerge then
-	lb_Result  = in_pdf1.of_mergefiles(ls_files[], ls_join)
-	 //Checks the result
-	IF in_pdf1.il_ErrorType < 0 THEN
-	  messagebox ("Atención", in_pdf1.is_ErrorText, Exclamation!)
-	  RETURN FALSE
-	END IF
-ELSE
-	lb_Result =  in_pdf2.of_ghostscript( ls_join, ls_files[], "PDF") 
-END IF
+CHOOSE CASE  is_SplitMergeMetodh
+	CASE UseSplitMerge
+		lb_Result  = in_pdf1.of_mergefiles(ls_files[], ls_join)
+		 //Checks the result
+		IF in_pdf1.il_ErrorType < 0 THEN
+		  messagebox ("Atención", in_pdf1.is_ErrorText, Exclamation!)
+		  RETURN FALSE
+		END IF
+	CASE UseGhostScript
+		lb_Result =  in_pdf2.of_ghostscript( ls_join, ls_files[], "PDF") 
+	CASE UsePdfDocument
+		lb_Result  = in_pdf3.of_merge(ls_files[], ls_join)
+		 //Checks the result
+		IF in_pdf3.is_ErrorText <> "" THEN
+		  messagebox ("Atención", in_pdf3.is_ErrorText, Exclamation!)
+		  RETURN FALSE
+		END IF
+END CHOOSE	
 			
 if lb_Result then
 	
@@ -81,7 +90,8 @@ IF not of_control_pdf(as_ruta) THEN RETURN 0
 
 ls_directorio = in_File.of_GetDirectoryName(as_ruta)
 
-IF  is_SplitMergeMetodh  = UseSplitMerge THEN
+CHOOSE CASE  is_SplitMergeMetodh 
+	CASE UseSplitMerge 
 	
 	li_result = in_pdf1.of_splitFiles( as_ruta, ls_directorio)
 	 
@@ -89,13 +99,22 @@ IF  is_SplitMergeMetodh  = UseSplitMerge THEN
 	IF in_pdf1.il_ErrorType < 0 THEN
 	  messagebox ("Atención", in_pdf1.is_ErrorText, Exclamation!)
 	END IF
-ELSE
+	
+	CASE UseGhostScript
 		If not in_pdf2.of_split( as_ruta) Then
 			messagebox ("Atención", Error.Text, Exclamation!)
 		end if	
 		//Con GhostScript no se el nº de páginas generadas.
 		li_result = 1
-END IF	
+		
+	CASE 	UsePdfDocument 
+		li_result = in_pdf3.of_split( as_ruta, ls_directorio)
+	 
+		 //Checks the result
+		IF in_pdf3.is_ErrorText <> "" THEN
+		  messagebox ("Atención", in_pdf3.is_ErrorText, Exclamation!)
+		END IF
+END CHOOSE		
  
 RETURN li_result
 end function
@@ -103,22 +122,28 @@ end function
 public subroutine of_splitmergemetodh (integer ai_splitmergemetodh);is_SplitMergeMetodh=ai_SplitMergeMetodh
 end subroutine
 
-private function boolean of_control_dependencias ();IF  is_SplitMergeMetodh  = UseSplitMerge then
-	IF NOT FileExists(gs_dir+"SplitMergePdf.dll") THEN
-		messagebox ("Atención", "¡ Necesita el Archivo SplitMergePdf.dll !", Exclamation!)
-		Return FALSE
-	END IF
-	
-	IF NOT FileExists(gs_dir+"itextsharp.dll") THEN
-		messagebox ("Atención", "¡ Necesita el Archivo itextsharp.dll !", Exclamation!)
-		Return FALSE
-	END IF
-ELSE
+private function boolean of_control_dependencias ();String ls_archivos[]
+Int li_idx, li_totalArchivos
+
+CHOOSE CASE is_SplitMergeMetodh
+	CASE  UseSplitMerge 
+		ls_archivos[]={"BouncyCastle.Crypto.dll", "itext.barcodes.dll", "itext.commons.dll", "itext.forms.dll", "itext.io.dll", "itext.kernel.dll", "itext.layout.dll", "itext.pdfa.dll", "itext.sign.dll", "itext.styledxmlparser.dll", "itext.svg.dll", "Microsoft.DotNet.PlatformAbstractions.dll", "Microsoft.Extensions.DependencyInjection.Abstractions.dll", "Microsoft.Extensions.DependencyInjection.dll", "Microsoft.Extensions.DependencyModel.dll", "Microsoft.Extensions.Logging.Abstractions.dll", "Microsoft.Extensions.Logging.dll", "Microsoft.Extensions.Options.dll", "Microsoft.Extensions.Primitives.dll", "Newtonsoft.Json.dll", "SplitMergePdf.dll"}
+
+		li_totalArchivos = UpperBound(ls_archivos[])
+					
+		FOR li_idx = 1 TO li_totalArchivos
+			IF NOT FileExists(gs_dir+"itext7\"+ls_archivos[li_idx]) THEN
+				messagebox ("Atención", "¡ Necesita el Archivo "+ls_archivos[li_idx]+" !", Exclamation!)
+				Return FALSE
+			END IF
+		NEXT	
+
+CASE UseGhostScript 
 	IF NOT FileExists(In_pdf2.GhostExe) THEN
 		messagebox ("Atención", "¡ Necesita el Archivo gswin32c.exe !", Exclamation!)
 		Return FALSE
 	END IF	
-END IF	
+END CHOOSE	
 
 RETURN TRUE
 end function
@@ -158,11 +183,13 @@ end on
 
 event constructor;in_pdf1 =  CREATE nvo_splitmerge
 in_pdf2 =  CREATE n_cst_ghostscript
+in_pdf3 =  CREATE n_cst_pdfdocument
 in_file = CREATE nvo_FileService
 end event
 
 event destructor;destroy in_pdf1
 destroy in_pdf2
+destroy in_pdf3
 destroy in_file
 end event
 
