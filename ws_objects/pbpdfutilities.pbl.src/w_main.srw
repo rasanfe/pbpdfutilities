@@ -69,7 +69,6 @@ boolean titlebar = true
 string title = "PowerBuilder PDF Utilities"
 boolean controlmenu = true
 boolean minbox = true
-boolean maxbox = true
 string icon = "AppIcon!"
 boolean center = true
 rb_3 rb_3
@@ -259,6 +258,7 @@ string facename = "Arial"
 long textcolor = 33554432
 long backcolor = 553648127
 string text = "Usar Nuevo PdfDocument de PowerBuilder 2022"
+boolean checked = true
 end type
 
 event clicked;in_pdf.of_splitmergemetodh( UsePdfDocument)
@@ -313,7 +313,6 @@ string facename = "Arial"
 long textcolor = 33554432
 long backcolor = 553648127
 string text = "Usar Libreria NetCore  SplitMergePdf.DLL"
-boolean checked = true
 end type
 
 event clicked;in_pdf.of_splitmergemetodh(UseSplitMerge)
@@ -520,7 +519,7 @@ ldbl_elapsed = wf_PerfStop(ldbl_start)
 
 if lb_result=true then
 	st_msg.text ="Join Elapsed time: " + String(ldbl_elapsed, "#,##0.0000") + " seconds."
-	if  uo_wb_1.Navigate(sle_archivo.text) <> 1 then
+	if  not uo_wb_1.of_loadfile(sle_archivo.text) then
 		Messagebox("Error","Al cargar el archivo PDF Unido", Stopsign!)
 	else
 		sle_join.text=""
@@ -596,7 +595,7 @@ if li_rtn < 1 then return
 //contador=integer(left(right(trim(sle_archivo.text), 9), 5))	
 
 
-if uo_wb_1.Navigate(sle_archivo.text) <> 1 then
+if not uo_wb_1.of_loadfile(sle_archivo.text) then
 	Messagebox("Error","Al cargar el archivo PDF", Stopsign!)
 else
 	cb_split.enabled=true
@@ -636,7 +635,7 @@ ChangeDirectory ( ls_current )
 if li_rtn < 1 then return
 //contador=integer(left(right(trim(sle_archivo.text), 9), 5))	
 
-if uo_wb_2.Navigate(sle_join.text)<>1 then
+if not uo_wb_2.of_loadfile(sle_join.text) then
 	Messagebox("Error","Al cargar el archivo PDF", Stopsign!)
 else
 	tab_1.tabpage_2.visible=true

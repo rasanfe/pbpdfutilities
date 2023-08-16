@@ -17,46 +17,107 @@ forward prototypes
 private subroutine of_setlasterror (long al_error)
 public function boolean of_merge (string as_filenames[], string as_targetpdf)
 public function long of_split (string as_inputfile, string as_outputpath)
+public function long of_pagecount (string as_inputfile)
 end prototypes
 
 private subroutine of_setlasterror (long al_error);Choose Case al_error
 	Case 1	
 		is_ErrorText = ""
 	Case -1
-		is_ErrorText = "General error"
+		is_ErrorText = "Error común."
+	Case -2
+		is_ErrorText = "Objeto no válido."
 	Case -3
-		is_ErrorText = "Invalid PDFDocument object"
+		is_ErrorText = "Objeto de documento no válido."
 	Case -4
-		is_ErrorText = "Invalid PDFPage object"
+		is_ErrorText = "Objeto de página no válido."
+	Case -5
+		is_ErrorText = "Objeto de texto no válido."
+	Case -6
+		is_ErrorText = "Objeto de texto de varias líneas no válido."
+	Case -7
+		is_ErrorText = "Objeto de texto enriquecido no válido."
+	Case -8
+		is_ErrorText = "Objeto de imagen no válido."
+	Case -9
+		is_ErrorText = "Objeto de fuente no válido."
+	Case -10
+		is_ErrorText = "Objeto de capa no válido."
+	Case -11
+		is_ErrorText = "Contenedor de capa no válido."
+	Case -12
+		is_ErrorText = "Objeto de ensamblaje de capa no válido."
 	Case -13
-		is_ErrorText = "The index is out of range2"
+		is_ErrorText = "Índice no válido."
+	Case -14
+		is_ErrorText = "Argumento no válido."
 	Case -15
-		is_ErrorText = "Invalid PDFImportContent object"
+		is_ErrorText = "Objeto no válido para importar."
 	Case -16
-		is_ErrorText = "The start index is out of range"
+		is_ErrorText = "Índice de inicio no válido."
 	Case -17
-		is_ErrorText = "Invalid index range"
+		is_ErrorText = "Ámbito de índice no válido."
+	Case -18
+		is_ErrorText = "Nombre de objeto no válido."
 	Case -19
-		is_ErrorText = "Invalid file name"
+		is_ErrorText = "Nombre de archivo no válido."
+	Case -20
+		is_ErrorText = "Nombre de fuente no válido."
+	Case -21
+		is_ErrorText = "Objeto visible no válido."
 	Case -22
-		is_ErrorText = "Invalid password. The master password and the user password cannot be empty, and they cannot be the same."
+		is_ErrorText = "Contraseña no válida; la contraseña principal y la contraseña de usuario no pueden ser nulas ni iguales."
 	Case -23
-		is_ErrorText = "Invalid PDFDocumentProperties object"
+		is_ErrorText = "Objeto de propiedad de documento no válido."
 	Case -24
-		is_ErrorText = "Invalid handle of PDFlib"
+		is_ErrorText = "Manejador no válido."
 	Case -25
-		is_ErrorText = "An exception occurred while executing the PDFlib operation"
+		is_ErrorText = "Operación anormal."
 	Case -26
-		is_ErrorText ="Failed to open the PDF document"
+		is_ErrorText = "Error al abrir el documento PDF."
 	Case -27
-		is_ErrorText = "Failed to create the PDF document"
-	Case -32 
-		is_ErrorText = "The PDF object does not exist"
+		is_ErrorText = "Error al crear el documento PDF."
+	Case -28
+		is_ErrorText = "Error al crear el texto de varias líneas."
+	Case -29
+		is_ErrorText = "Error al cargar la fuente."
+	Case -30
+		is_ErrorText = "Error al cargar la imagen."
+	Case -31
+		is_ErrorText = "Error al localizar el objeto en la página."
+	Case -32
+		is_ErrorText = "El objeto no existe."
 	Case -33
-		is_ErrorText = "The object already has its owner"
-	Case -34 
-		is_ErrorText = "The ReadOnly object is not allowed to be modified"
-end choose	
+		is_ErrorText = "El objeto ya tiene un propietario."
+	Case -34
+		is_ErrorText = "El objeto de solo lectura no se puede modificar."
+	Case -35
+		is_ErrorText = "Error al realizar la serialización XML."
+	Case -36
+		is_ErrorText = "Objeto no aplicable al formato de documento actual."
+	Case -37
+		is_ErrorText = "Ancho no especificado."
+	Case -38
+		is_ErrorText = "Error al inicializar el generador ficticio."
+	Case -39
+		is_ErrorText = "Operación no compatible."
+	Case -40
+		is_ErrorText = "Nombre de carpeta no válido."
+	Case -41
+		is_ErrorText = "Error al instanciar el objeto."
+	Case -42
+		is_ErrorText = "Error al escribir en el archivo."
+	Case -43
+		is_ErrorText = "Error al cargar el archivo."
+	Case -44 
+		is_ErrorText = "Ruta de archivo no válida."
+	Case -45 
+		is_ErrorText = "Protocolo no reconocido."
+	Case -46
+		is_ErrorText = "Marca de agua incompatible con el archivo adjunto."
+	Case else
+		is_ErrorText = "Código de error no reconocido."
+End Choose 
 
 	
 end subroutine
@@ -94,7 +155,7 @@ end function
 
 public function long of_split (string as_inputfile, string as_outputpath);String ls_filename, ls_outputfile
 Long ll_rtn
-long ll_pag
+long ll_pag, ll_pageCount
 nvo_fileservice ln_file
 PDFDocument ln_PDFDoc
 
@@ -105,8 +166,14 @@ ls_filename = ln_file.of_getfilenamewithoutextension(ls_filename)
 
 ll_pag = 0
 
-DO WHILE TRUE
-	ll_pag ++
+//Obtenemos el nº de Páginas.
+ll_pageCount = of_PageCount(as_inputfile)
+
+IF ll_pageCount = -1 THEN
+	return ll_pageCount
+END IF	
+
+FOR ll_pag = 1 TO ll_pageCount
 	ln_PDFDoc =  CREATE PDFDocument
 	ll_rtn = ln_PDFDoc.importpdf( as_inputFile, ll_pag, ll_pag, 1)
 	IF ll_rtn = 1 THEN
@@ -114,16 +181,34 @@ DO WHILE TRUE
 		ll_rtn = ln_PDFDoc.Save(ls_outputFile)
 		Destroy ln_PDFDoc
 	ELSE
-		IF ll_rtn = -16 THEN ll_rtn = 1 //The start index is out of range Saldremos con exito con este error del LOOP
-		ll_pag --
-		exit
+		EXIT
 	END IF
-LOOP	
+NEXT	
 
 of_SetLastError(ll_rtn)
 
-Return ll_pag
+Return ll_pageCount
 
+end function
+
+public function long of_pagecount (string as_inputfile);PDFDocument ln_PDFDoc
+long ll_pageCount
+Integer ll_rtn
+
+ln_PDFDoc =  CREATE PDFDocument
+
+ll_rtn = ln_pdfDoc.importpdf(as_inputfile)
+
+IF ll_rtn = 1 THEN
+	ll_pageCount = ln_PDFDoc.GetPageCount()
+ELSE
+	of_setlasterror(ll_rtn)
+	ll_pageCount = -1
+END IF	
+
+Destroy ln_PDFDoc
+
+RETURN ll_pageCount
 end function
 
 on n_cst_pdfdocument.create
