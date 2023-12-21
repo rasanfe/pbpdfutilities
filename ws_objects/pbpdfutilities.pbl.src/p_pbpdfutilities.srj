@@ -5,10 +5,10 @@ COM:RSRSYSTEM
 DES:Appeon Power Builder 2022 Product File 64Bits
 CPY:Ramón San Félix Ramón
 PRD:PbPDFUtilities2022
-PVS:2022.2.2828.12
-PVN:2022,2,2828,12
-FVS:2022.2.2828.12
-FVN:2022,2,2828,12
+PVS:2022.2.2828.13
+PVN:2022,2,2828,13
+FVS:2022.2.2828.13
+FVN:2022,2,2828,13
 MAN:0,asInvoker,0
 PBD:pbpdfutilities.pbl,,1
 OBJ:C:\proyecto pw2022\Blog\PowerBuilder\pbpdfutilities\pbpdfutilities.pbl,n_cst_pdfdocument,u

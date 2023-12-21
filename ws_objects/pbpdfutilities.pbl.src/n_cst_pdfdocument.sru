@@ -115,8 +115,13 @@ private subroutine of_setlasterror (long al_error);Choose Case al_error
 		is_ErrorText = "Protocolo no reconocido."
 	Case -46
 		is_ErrorText = "Marca de agua incompatible con el archivo adjunto."
+	Case -48 
+		is_ErrorText = "Contraseña maestra incorrecta o faltante."
+	Case -49
+		is_ErrorText = "El objeto de formulario se ha importado varias veces."	
 	Case else
 		is_ErrorText = "Código de error no reconocido."
+		
 End Choose 
 
 	
