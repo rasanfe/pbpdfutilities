@@ -20,6 +20,7 @@ Constant Integer UseGhostScript = 2
 Constant Integer UsePdfDocument = 3
 Integer is_SplitMergeMetodh = UseSplitMerge
 end variables
+
 forward prototypes
 public function boolean of_unir (string as_ruta1, string as_ruta2)
 public function integer of_dividir (string as_ruta)
@@ -127,7 +128,7 @@ Int li_idx, li_totalArchivos
 
 CHOOSE CASE is_SplitMergeMetodh
 	CASE  UseSplitMerge 
-		ls_archivos[]={"BouncyCastle.Crypto.dll", "itext.barcodes.dll", "itext.commons.dll", "itext.forms.dll", "itext.io.dll", "itext.kernel.dll", "itext.layout.dll", "itext.pdfa.dll", "itext.sign.dll", "itext.styledxmlparser.dll", "itext.svg.dll", "Microsoft.DotNet.PlatformAbstractions.dll", "Microsoft.Extensions.DependencyInjection.Abstractions.dll", "Microsoft.Extensions.DependencyInjection.dll", "Microsoft.Extensions.DependencyModel.dll", "Microsoft.Extensions.Logging.Abstractions.dll", "Microsoft.Extensions.Logging.dll", "Microsoft.Extensions.Options.dll", "Microsoft.Extensions.Primitives.dll", "Newtonsoft.Json.dll", "SplitMergePdf.dll"}
+		ls_archivos[]={"BouncyCastle.Cryptography.dll", "itext.barcodes.dll", "itext.commons.dll", "itext.forms.dll", "itext.io.dll", "itext.kernel.dll", "itext.layout.dll", "itext.pdfa.dll", "itext.sign.dll", "itext.styledxmlparser.dll", "itext.svg.dll", "Microsoft.DotNet.PlatformAbstractions.dll", "Microsoft.Extensions.DependencyInjection.Abstractions.dll", "Microsoft.Extensions.DependencyInjection.dll", "Microsoft.Extensions.DependencyModel.dll", "Microsoft.Extensions.Logging.Abstractions.dll", "Microsoft.Extensions.Logging.dll", "Microsoft.Extensions.Options.dll", "Microsoft.Extensions.Primitives.dll", "Newtonsoft.Json.dll", "SplitMergePdf.dll"}
 
 		li_totalArchivos = UpperBound(ls_archivos[])
 					
