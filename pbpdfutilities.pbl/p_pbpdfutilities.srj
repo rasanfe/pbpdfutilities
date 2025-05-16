@@ -1,0 +1,21 @@
+﻿EXE:pbpdfutilities.exe,,0,1,1,0,C:\Program Files (x86)\Appeon\Common\PowerBuilder\Runtime 25.0.0.3683
+CMP:0,0,0,3,0,0,1
+COM:RSRSYSTEM
+DES:Appeon Power Builder 2022 Product File 64Bits
+CPY:Ramón San Félix Ramón
+PRD:PbPDFUtilities2025
+PVS:2025.1.3683.17
+PVN:2025,1,3683,17
+FVS:2025.1.3683.17
+FVN:2025,1,3683,17
+MAN:0,asInvoker,0
+PBD:pbpdfutilities.pbl,,1
+PBD:dotnet.pbl,,1
+OBJ:C:\proyecto pw2025\Blog\PowerBuilder\pbpdfutilities\pbpdfutilities.pbl,n_cst_pdfservice,u
+OBJ:C:\proyecto pw2025\Blog\PowerBuilder\pbpdfutilities\pbpdfutilities.pbl,pbpdfutilities,a
+OBJ:C:\proyecto pw2025\Blog\PowerBuilder\pbpdfutilities\pbpdfutilities.pbl,vs_web_browser,u
+OBJ:C:\proyecto pw2025\Blog\PowerBuilder\pbpdfutilities\pbpdfutilities.pbl,n_cst_ghostscript,u
+OBJ:C:\proyecto pw2025\Blog\PowerBuilder\pbpdfutilities\dotnet.pbl,nvo_splitmerge,u
+OBJ:C:\proyecto pw2025\Blog\PowerBuilder\pbpdfutilities\pbpdfutilities.pbl,n_cst_pdfdocument,u
+OBJ:C:\proyecto pw2025\Blog\PowerBuilder\pbpdfutilities\pbpdfutilities.pbl,nvo_fileservice,u
+OBJ:C:\proyecto pw2025\Blog\PowerBuilder\pbpdfutilities\pbpdfutilities.pbl,w_main,w
