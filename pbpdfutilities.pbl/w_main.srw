@@ -65,7 +65,7 @@ global type w_main from window
 integer width = 4631
 integer height = 3368
 boolean titlebar = true
-string title = "PowerBuilder PDF Utilities 2025"
+string title = "Usar PowerBuilder PDF Utilities 2025"
 boolean controlmenu = true
 boolean minbox = true
 string icon = "AppIcon!"
@@ -256,7 +256,7 @@ fontfamily fontfamily = swiss!
 string facename = "Arial"
 long textcolor = 33554432
 long backcolor = 553648127
-string text = "Usar Nuevo PdfDocument de PowerBuilder 2022"
+string text = "Usar PdfDocument de PowerBuilder 2025"
 boolean checked = true
 end type
 
