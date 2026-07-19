@@ -8,3 +8,5 @@ build/
 
 # Regenerable (no versionar)
 *.pra
+# lanzador local de Claude (no versionar)
+iniciar_claude.bat
